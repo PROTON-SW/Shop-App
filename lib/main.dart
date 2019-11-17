@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/models/product.dart';
+import 'package:shop_app/screens/product-details-screen.dart';
 import 'package:shop_app/screens/products-overview-screen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  List<Product> products = [
+  final List<Product> _products = [
     Product(
       id: 'p1',
       title: 'Red Shirt',
@@ -42,7 +43,7 @@ class MyApp extends StatelessWidget {
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
   ];
-  PreferredSizeWidget appBar = Platform.isIOS
+  final PreferredSizeWidget appBar = Platform.isIOS
       ? CupertinoNavigationBar(
           middle: Text('Shop App'),
         )
@@ -54,15 +55,23 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        accentColor: Colors.deepOrange,
+        canvasColor: Color.fromRGBO(255, 254, 229, 1),
+        fontFamily: 'Lato',
       ),
       routes: {
         ProductsOverviewScreen.routeName: (ctx) => ProductsOverviewScreen(
+              appBar: appBar,
+              products: _products,
+            ),
+        ProductDetailsScreen.routeName: (ctx) => ProductDetailsScreen(
               appBar: appBar,
             ),
       },
       home: ProductsOverviewScreen(
         appBar: appBar,
+        products: _products,
       ),
     );
   }
