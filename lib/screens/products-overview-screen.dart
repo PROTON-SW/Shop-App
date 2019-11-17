@@ -1,22 +1,32 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:shop_app/models/product.dart';
+import 'package:shop_app/widgets/product-item.dart';
 
 class ProductsOverviewScreen extends StatelessWidget {
   static const routeName = 'products-overview';
-  PreferredSizeWidget appBar = Platform.isIOS 
-  ? CupertinoNavigationBar(
-    middle: Text('Shop App'),
-  )
-  : AppBar(
-    title: Text('Shop App'),
-  );
+  final PreferredSizeWidget appBar;
+  final List<Product> products;
+
+  const ProductsOverviewScreen({
+    Key key,
+    this.appBar,
+    this.products,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
-      body: Center(
-        child: Text('Let\'s build shop app'),
+      body: GridView.builder(
+        itemCount: products.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          childAspectRatio: 3 / 2,
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+        ),
+        itemBuilder: (context, i) {
+          return ProductItem(products[i]);
+        },
       ),
     );
   }
