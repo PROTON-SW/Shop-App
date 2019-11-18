@@ -33,7 +33,10 @@ class ProductItem extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           onTap: () {
-            Navigator.of(context).pushNamed(ProductDetailsScreen.routeName);
+            Navigator.of(context).pushNamed(
+              ProductDetailsScreen.routeName,
+              arguments: product.id,
+            );
           },
         ),
       ),
