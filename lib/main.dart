@@ -20,8 +20,8 @@ class MyApp extends StatelessWidget {
         );
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      builder: (ctx) => Products(),
+    return ChangeNotifierProvider.value(
+      value: Products(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(
@@ -31,15 +31,10 @@ class MyApp extends StatelessWidget {
           fontFamily: 'Lato',
         ),
         routes: {
-          ProductsOverviewScreen.routeName: (ctx) => ProductsOverviewScreen(
-                appBar: appBar,
-              ),
-          ProductDetailsScreen.routeName: (ctx) => ProductDetailsScreen(
-              ),
+          ProductsOverviewScreen.routeName: (ctx) => ProductsOverviewScreen(),
+          ProductDetailsScreen.routeName: (ctx) => ProductDetailsScreen(),
         },
-        home: ProductsOverviewScreen(
-          appBar: appBar,
-        ),
+        home: ProductsOverviewScreen(),
       ),
     );
   }
