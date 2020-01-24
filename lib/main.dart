@@ -1,24 +1,14 @@
-import 'dart:io';
-
-import 'package:provider/provider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shop_app/providers/cart.dart';
+import 'package:provider/provider.dart';
 
-import './providers/products-provider.dart';
-import './screens/product-details-screen.dart';
-import './screens/products-overview-screen.dart';
+import './screens/products_overview_screen.dart';
+import './screens/product_detail_screen.dart';
+import './providers/products.dart';
+import './providers/cart.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  final PreferredSizeWidget appBar = Platform.isIOS
-      ? CupertinoNavigationBar(
-          middle: Text('Shop App'),
-        )
-      : AppBar(
-          title: Text('Shop App'),
-        );
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -30,25 +20,17 @@ class MyApp extends StatelessWidget {
           value: Cart(),
         ),
       ],
-        child: MaterialApp(
-          title: 'Flutter Demo',
+      child: MaterialApp(
+          title: 'MyShop',
           theme: ThemeData(
             primarySwatch: Colors.purple,
             accentColor: Colors.deepOrange,
-            canvasColor: Color.fromRGBO(255, 254, 229, 1),
             fontFamily: 'Lato',
           ),
+          home: ProductsOverviewScreen(),
           routes: {
-            ProductsOverviewScreen.routeName: (ctx) => ProductsOverviewScreen(
-                  appBar: appBar,
-                ),
-            ProductDetailsScreen.routeName: (ctx) => ProductDetailsScreen(
-                ),
-          },
-          home: ProductsOverviewScreen(
-            appBar: appBar,
-          ),
-        ),
+            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+          }),
     );
   }
 }
