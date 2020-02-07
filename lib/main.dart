@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_complete_guide/screens/cart_screen.dart';
 import 'package:provider/provider.dart';
 
+import './screens/cart_screen.dart';
 import './screens/products_overview_screen.dart';
 import './screens/product_detail_screen.dart';
 import './providers/products.dart';
 import './providers/cart.dart';
+import './providers/orders.dart';
+import './screens/orders_screen.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
@@ -21,9 +22,11 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider.value(
           value: Cart(),
         ),
+        ChangeNotifierProvider.value(
+          value: Orders(),
+        ),
       ],
       child: MaterialApp(
-          debugShowCheckedModeBanner: false,
           title: 'MyShop',
           theme: ThemeData(
             primarySwatch: Colors.purple,
@@ -34,25 +37,8 @@ class MyApp extends StatelessWidget {
           routes: {
             ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
             CartScreen.routeName: (ctx) => CartScreen(),
+            OrdersScreen.routeName: (ctx) => OrdersScreen(),
           }),
-=======
-    return ChangeNotifierProvider.value(
-      value: Products(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.purple,
-          accentColor: Colors.deepOrange,
-          canvasColor: Color.fromRGBO(255, 254, 229, 1),
-          fontFamily: 'Lato',
-        ),
-        routes: {
-          ProductsOverviewScreen.routeName: (ctx) => ProductsOverviewScreen(),
-          ProductDetailsScreen.routeName: (ctx) => ProductDetailsScreen(),
-        },
-        home: ProductsOverviewScreen(),
-      ),
->>>>>>> 37c851909b2e258cc235c43944a2abc333490746
     );
   }
 }

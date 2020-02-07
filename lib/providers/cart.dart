@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 import 'package:flutter/foundation.dart';
-=======
-import 'package:flutter/material.dart';
->>>>>>> 37c851909b2e258cc235c43944a2abc333490746
 
 class CartItem {
   final String id;
@@ -19,7 +15,6 @@ class CartItem {
 }
 
 class Cart with ChangeNotifier {
-<<<<<<< HEAD
   Map<String, CartItem> _items = {};
 
   Map<String, CartItem> get items {
@@ -38,65 +33,43 @@ class Cart with ChangeNotifier {
     return total;
   }
 
-  void addItem(String productId, double price, String title) {
-    if (_items.containsKey(productId)) {
-      // change quantity...
-      _items.update(
-        productId,
-        (existingCartItem) => CartItem(
-          id: existingCartItem.id,
-          title: existingCartItem.title,
-          price: existingCartItem.price,
-          quantity: existingCartItem.quantity + 1,
-        ),
-      );
-    } else {
-      _items.putIfAbsent(
-        productId,
-        () => CartItem(
-          id: DateTime.now().toString(),
-          title: title,
-          price: price,
-          quantity: 1,
-        ),
-      );
-    }
-    notifyListeners();
-  }
-
-  void deleteItem(String productId) {
-    _items.remove(productId);
-    notifyListeners();
-=======
-  Map<String, CartItem> _items;
-
-  Map<String, CartItem> get items {
-    return _items;
-  }
-
-  void addProduct(
+  void addItem(
     String productId,
     double price,
     String title,
   ) {
     if (_items.containsKey(productId)) {
+      // change quantity...
       _items.update(
-          productId,
-          (existingCartItem) => CartItem(
-                id: existingCartItem.id,
-                title: existingCartItem.title,
-                price: existingCartItem.price,
-                quantity: existingCartItem.quantity + 1,
-              ));
+        productId,
+        (existingCartItem) => CartItem(
+              id: existingCartItem.id,
+              title: existingCartItem.title,
+              price: existingCartItem.price,
+              quantity: existingCartItem.quantity + 1,
+            ),
+      );
     } else {
       _items.putIfAbsent(
-          productId,
-          () => CartItem(
+        productId,
+        () => CartItem(
               id: DateTime.now().toString(),
               title: title,
               price: price,
-              quantity: 1));
+              quantity: 1,
+            ),
+      );
     }
->>>>>>> 37c851909b2e258cc235c43944a2abc333490746
+    notifyListeners();
+  }
+
+  void removeItem(String productId) {
+    _items.remove(productId);
+    notifyListeners();
+  }
+
+  void clear() {
+    _items = {};
+    notifyListeners();
   }
 }
